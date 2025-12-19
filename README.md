@@ -55,41 +55,65 @@ sudo ./scripts/setup-host-audio.sh
 ### 1. Lancer le serveur (Hoster)
 
 ```bash
+./scripts/run-hoster.sh
+```
+
+Ou avec podman-compose :
+
+```bash
 podman-compose --profile server up hoster
 ```
 
-Ou manuellement :
+### 2. Configurer le serveur
 
-```bash
-podman run --rm -d \
-    --network=host \
-    -e DISPLAY=$DISPLAY \
-    -v ./build/game/FS3hoster/Data:/game/FS3hoster/Data \
-    -v ./build/game/Arenes:/game/Arenes \
-    --name fs3-hoster \
-    friendly-strike3:latest hoster
-```
+Dans la fenêtre du Hoster :
 
-### 2. Lancer le client (Jeu)
+1. Renseigne les paramètres (nom du serveur, port, mot de passe...)
+2. Va dans le menu **Server** → **Connect** pour lancer l'écoute
+3. Le statut passe de "Offline" à "Online"
+4. Note l'adresse **Computer local IP** (ex: `192.168.0.20`)
 
-Sur la même machine ou une autre machine du réseau :
+### 3. L'hébergeur rejoint son propre serveur
+
+L'hébergeur lance ensuite le jeu sur sa machine :
 
 ```bash
 ./scripts/run-game.sh
 ```
 
-### 3. Rejoindre la partie
+Dans le jeu :
 
-1. **Dans le Hoster** : Sélectionne une arène, configure les options, clique sur "Héberger"
-2. **Dans le Jeu** : Menu "Multijoueur" → "Réseau local" → Sélectionne le serveur
+1. Va dans **Multijoueur** → **Connexion directe**
+2. Entre l'IP locale du serveur (Computer local IP, ex: `192.168.0.20`)
+3. Entre le port (par défaut `1206`)
+4. Connecte-toi au serveur
 
-### Connexion depuis un autre PC
+### 4. Créer une partie
 
-Les autres joueurs du réseau local peuvent rejoindre en entrant l'IP du serveur dans le jeu.
+Une fois dans le lobby :
 
-Assurez-vous que les ports sont ouverts :
+1. Clique sur **Créer** pour créer une nouvelle partie
+2. Choisis la carte, les options de jeu, etc.
+3. Attends que les autres joueurs rejoignent
+
+### 5. Les autres joueurs rejoignent
+
+Sur les autres machines du réseau :
+
+1. Lance le jeu : `./scripts/run-game.sh`
+2. Va dans **Multijoueur** → **Connexion directe**
+3. Entre l'IP du serveur (la même que l'hébergeur)
+4. Rejoins la partie créée par l'hébergeur
+
+### 6. Lancer la partie
+
+Une fois tous les joueurs présents dans le lobby, l'hébergeur peut lancer la partie.
+
+### Ports requis
+
+Assurez-vous que les ports sont ouverts sur le pare-feu :
 - **1203/UDP** - Port principal
-- **1206/UDP** - Port serveur
+- **1206/UDP** - Port serveur (configurable)
 
 ## Configuration audio
 
