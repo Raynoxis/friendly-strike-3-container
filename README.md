@@ -73,6 +73,8 @@ Dans la fenêtre du Hoster :
 3. Le statut passe de "Offline" à "Online"
 4. Note l'adresse **Computer local IP** (ex: `192.168.0.20`)
 
+![Configuration du serveur](docs/images/server.png)
+
 ### 3. L'hébergeur rejoint son propre serveur
 
 L'hébergeur lance ensuite le jeu sur sa machine :
@@ -88,6 +90,8 @@ Dans le jeu :
 3. Entre le port (par défaut `1206`)
 4. Connecte-toi au serveur
 
+![Connexion directe](docs/images/connexion.png)
+
 ### 4. Créer une partie
 
 Une fois dans le lobby :
@@ -95,6 +99,8 @@ Une fois dans le lobby :
 1. Clique sur **Créer** pour créer une nouvelle partie
 2. Choisis la carte, les options de jeu, etc.
 3. Attends que les autres joueurs rejoignent
+
+![Lobby et création de partie](docs/images/create.png)
 
 ### 5. Les autres joueurs rejoignent
 
