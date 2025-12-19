@@ -53,20 +53,3 @@ services:
     profiles:
       - server
 
-  # ===========================================================================
-  # Serveur headless (sans GUI)
-  # ===========================================================================
-  hoster-headless:
-    build: ./build
-    image: friendly-strike3:latest
-    container_name: fs3-hoster-headless
-    network_mode: host
-    environment:
-      - DISPLAY=
-    volumes:
-      - ./build/game/FS3hoster/Data:/game/FS3hoster/Data
-      - ./build/game/Arenes:/game/Arenes
-    command: hoster
-    restart: unless-stopped
-    profiles:
-      - server-headless

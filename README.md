@@ -83,14 +83,6 @@ Sur la même machine ou une autre machine du réseau :
 1. **Dans le Hoster** : Sélectionne une arène, configure les options, clique sur "Héberger"
 2. **Dans le Jeu** : Menu "Multijoueur" → "Réseau local" → Sélectionne le serveur
 
-### Serveur headless (sans GUI)
-
-Pour un serveur permanent sans interface graphique :
-
-```bash
-podman-compose --profile server-headless up -d hoster-headless
-```
-
 ### Connexion depuis un autre PC
 
 Les autres joueurs du réseau local peuvent rejoindre en entrant l'IP du serveur dans le jeu.
