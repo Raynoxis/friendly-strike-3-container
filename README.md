@@ -36,7 +36,7 @@ sudo ./scripts/setup-host-audio.sh
 
 ## Utilisation
 
-### Lancer le jeu
+### Lancer le jeu (solo)
 
 ```bash
 ./scripts/run-game.sh
@@ -50,18 +50,54 @@ sudo ./scripts/setup-host-audio.sh
 ./scripts/select-audio-output.sh list     # Voir les options
 ```
 
-### Avec docker-compose
+## Jeu en réseau local (LAN)
+
+### 1. Lancer le serveur (Hoster)
 
 ```bash
-# Jeu
-podman-compose --profile client up game
-
-# Serveur avec GUI
 podman-compose --profile server up hoster
+```
 
-# Serveur headless
+Ou manuellement :
+
+```bash
+podman run --rm -d \
+    --network=host \
+    -e DISPLAY=$DISPLAY \
+    -v ./build/game/FS3hoster/Data:/game/FS3hoster/Data \
+    -v ./build/game/Arenes:/game/Arenes \
+    --name fs3-hoster \
+    friendly-strike3:latest hoster
+```
+
+### 2. Lancer le client (Jeu)
+
+Sur la même machine ou une autre machine du réseau :
+
+```bash
+./scripts/run-game.sh
+```
+
+### 3. Rejoindre la partie
+
+1. **Dans le Hoster** : Sélectionne une arène, configure les options, clique sur "Héberger"
+2. **Dans le Jeu** : Menu "Multijoueur" → "Réseau local" → Sélectionne le serveur
+
+### Serveur headless (sans GUI)
+
+Pour un serveur permanent sans interface graphique :
+
+```bash
 podman-compose --profile server-headless up -d hoster-headless
 ```
+
+### Connexion depuis un autre PC
+
+Les autres joueurs du réseau local peuvent rejoindre en entrant l'IP du serveur dans le jeu.
+
+Assurez-vous que les ports sont ouverts :
+- **1203/UDP** - Port principal
+- **1206/UDP** - Port serveur
 
 ## Configuration audio
 
@@ -73,12 +109,28 @@ Prérequis sur le serveur hôte :
 
 Le script `scripts/setup-host-audio.sh` configure tout automatiquement.
 
+## Commandes utiles
+
+```bash
+# Voir les conteneurs FS3 en cours
+podman ps --filter "name=fs3"
+
+# Arrêter le serveur
+podman stop fs3-hoster
+
+# Arrêter le jeu
+podman stop fs3-game
+
+# Voir les logs du serveur
+podman logs fs3-hoster
+```
+
 ## Ports réseau
 
-| Port | Description |
-|------|-------------|
-| 1203/UDP | Port principal |
-| 1206/UDP | Port serveur |
+| Port | Protocole | Description |
+|------|-----------|-------------|
+| 1203 | UDP | Port principal FS3 |
+| 1206 | UDP | Port serveur (configurable) |
 
 ## Licence
 
