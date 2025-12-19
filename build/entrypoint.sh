@@ -1,12 +1,11 @@
 #!/bin/bash
 set -e
 
-# Configuration de l'affichage
+# Vérification du DISPLAY
 if [ -z "$DISPLAY" ]; then
-    echo "Démarrage de Xvfb..."
-    Xvfb :99 -screen 0 1024x768x16 &
-    export DISPLAY=:99
-    sleep 2
+    echo "Erreur: DISPLAY non défini. Un serveur X11 est requis."
+    echo "Exemple: -e DISPLAY=192.168.0.20:0.0"
+    exit 1
 fi
 
 # Configuration PulseAudio (si socket disponible)

@@ -16,7 +16,6 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         winehq-stable \
-        xvfb \
         x11-utils \
         libgl1-mesa-glx:i386 \
         libgl1-mesa-dri:i386 \
@@ -28,7 +27,6 @@ RUN dpkg --add-architecture i386 && \
 # Configuration de Wine
 ENV WINEARCH=win32
 ENV WINEPREFIX=/wine
-ENV DISPLAY=:99
 
 # Initialisation légère de Wine (sans polices externes)
 RUN mkdir -p /wine && \
