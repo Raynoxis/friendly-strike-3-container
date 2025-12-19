@@ -2,36 +2,36 @@
 
 Conteneurisation du jeu Windows **Friendly-Strike 3** pour Linux avec Wine et Podman/Docker.
 
-## Fonctionnalités
+## Structure
 
-- Jeu Windows natif fonctionnant sous Linux via Wine
-- Affichage X11 local ou distant
-- Audio via PulseAudio/PipeWire (HDMI ou analogique)
-- Serveur de parties (hoster) avec mode headless
-
-## Prérequis
-
-- Podman ou Docker
-- Serveur X11 (local ou distant)
-- PipeWire ou PulseAudio pour l'audio
-- Les fichiers du jeu Friendly-Strike 3
+```
+├── build/                      # Construction de l'image
+│   ├── Dockerfile
+│   ├── entrypoint.sh
+│   └── game/                   # Fichiers du jeu
+│
+├── scripts/                    # Scripts d'exécution
+│   ├── run-game.sh             # Lancer le jeu
+│   ├── run-hoster.sh           # Lancer le serveur
+│   ├── setup-host-audio.sh     # Config audio serveur
+│   └── select-audio-output.sh  # Sélection HDMI/analog
+│
+├── docker-compose.yml
+└── README.md
+```
 
 ## Installation
 
 ```bash
-# Cloner le repo
+# Cloner
 git clone https://github.com/Raynoxis/friendly-strike-3-container.git
 cd friendly-strike-3-container
 
-# Copier les fichiers du jeu dans le dossier game/
-mkdir -p game
-cp -r /chemin/vers/FriendlyStrike3/* game/
-
 # Construire l'image
-podman build -t friendly-strike3:latest .
+podman build -t friendly-strike3:latest ./build
 
-# Configurer l'audio du serveur (une seule fois)
-sudo ./setup-host-audio.sh
+# Configurer l'audio (une seule fois)
+sudo ./scripts/setup-host-audio.sh
 ```
 
 ## Utilisation
@@ -39,26 +39,21 @@ sudo ./setup-host-audio.sh
 ### Lancer le jeu
 
 ```bash
-./run-game.sh
+./scripts/run-game.sh
 ```
 
 ### Changer la sortie audio
 
 ```bash
-# Voir les sorties disponibles
-./select-audio-output.sh list
-
-# Activer HDMI
-./select-audio-output.sh hdmi
-
-# Activer haut-parleurs
-./select-audio-output.sh analog
+./scripts/select-audio-output.sh hdmi     # Sortie HDMI
+./scripts/select-audio-output.sh analog   # Sortie haut-parleurs
+./scripts/select-audio-output.sh list     # Voir les options
 ```
 
 ### Avec docker-compose
 
 ```bash
-# Jeu client
+# Jeu
 podman-compose --profile client up game
 
 # Serveur avec GUI
@@ -68,37 +63,23 @@ podman-compose --profile server up hoster
 podman-compose --profile server-headless up -d hoster-headless
 ```
 
-## Structure
-
-```
-├── Dockerfile              # Image Wine + jeu
-├── docker-compose.yml      # Orchestration
-├── entrypoint.sh           # Script démarrage conteneur
-├── run-game.sh             # Lancer le jeu
-├── run-hoster.sh           # Lancer le serveur
-├── setup-host-audio.sh     # Config audio serveur
-├── select-audio-output.sh  # Sélection sortie audio
-└── game/                   # Fichiers du jeu (non inclus)
-```
-
 ## Configuration audio
 
-Le son passe par le socket PulseAudio de l'hôte. Prérequis :
+Prérequis sur le serveur hôte :
 
-1. L'utilisateur doit être dans le groupe `audio`
-2. PipeWire/PulseAudio doit être actif
-3. Le socket `/run/user/$(id -u)/pulse/native` doit exister
+1. Utilisateur dans le groupe `audio`
+2. PipeWire ou PulseAudio actif
+3. Socket `/run/user/$(id -u)/pulse/native` existant
 
-Voir `setup-host-audio.sh` pour la configuration automatique.
+Le script `scripts/setup-host-audio.sh` configure tout automatiquement.
 
-## Ports réseau (serveur)
+## Ports réseau
 
 | Port | Description |
 |------|-------------|
-| 1203/UDP | Port principal FS3 |
+| 1203/UDP | Port principal |
 | 1206/UDP | Port serveur |
 
 ## Licence
 
-Ce projet contient uniquement les fichiers de configuration pour la conteneurisation.
-Les fichiers du jeu Friendly-Strike 3 ne sont pas inclus et restent la propriété de leurs auteurs.
+Les fichiers de configuration sont libres. Le jeu Friendly-Strike 3 reste la propriété de ses auteurs.
