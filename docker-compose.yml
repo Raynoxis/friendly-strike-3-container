@@ -1,0 +1,75 @@
+version: '3.8'
+
+# =============================================================================
+# Friendly-Strike 3 - Docker Compose
+# =============================================================================
+#
+# Variables d'environnement supportées:
+#   DISPLAY          - Serveur X11 (défaut: 192.168.0.20:0.0)
+#   PULSE_SOCKET     - Chemin du socket PulseAudio (défaut: /run/user/1000/pulse/native)
+#   HOST_UID         - UID de l'utilisateur hôte pour l'audio (défaut: 1000)
+#
+# Exemples d'utilisation:
+#   # Lancer le jeu avec audio local
+#   PULSE_SOCKET=/run/user/$(id -u)/pulse/native podman-compose --profile client up game
+#
+#   # Lancer le serveur headless
+#   podman-compose --profile server-headless up -d hoster-headless
+#
+# =============================================================================
+
+services:
+  # ===========================================================================
+  # Jeu client Friendly-Strike 3
+  # ===========================================================================
+  game:
+    build: .
+    image: friendly-strike3:latest
+    container_name: fs3-game
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY:-192.168.0.20:0.0}
+      - PULSE_SERVER=unix:${PULSE_SOCKET:-/run/user/1000/pulse/native}
+    volumes:
+      - ./game/Data:/game/Data  # Persistance des configs joueur
+      - ${PULSE_SOCKET:-/run/user/1000/pulse/native}:${PULSE_SOCKET:-/run/user/1000/pulse/native}:ro
+    devices:
+      - /dev/snd:/dev/snd
+    command: game
+    profiles:
+      - client
+
+  # ===========================================================================
+  # Serveur FS3 Hoster (hébergement de parties) - avec GUI
+  # ===========================================================================
+  hoster:
+    build: .
+    image: friendly-strike3:latest
+    container_name: fs3-hoster
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY:-192.168.0.20:0.0}
+    volumes:
+      - ./game/FS3hoster/Data:/game/FS3hoster/Data  # Persistance config serveur
+      - ./game/Arenes:/game/Arenes  # Arènes partagées
+    command: hoster
+    profiles:
+      - server
+
+  # ===========================================================================
+  # Serveur headless (sans GUI - utilise Xvfb interne)
+  # ===========================================================================
+  hoster-headless:
+    build: .
+    image: friendly-strike3:latest
+    container_name: fs3-hoster-headless
+    network_mode: host
+    environment:
+      - DISPLAY=  # Force Xvfb interne
+    volumes:
+      - ./game/FS3hoster/Data:/game/FS3hoster/Data
+      - ./game/Arenes:/game/Arenes
+    command: hoster
+    restart: unless-stopped
+    profiles:
+      - server-headless

@@ -1,0 +1,13 @@
+# Fichiers du jeu (non distribués - copyright)
+game/
+
+# Dossier Claude
+.claude/
+
+# Fichiers temporaires
+*.log
+*.tmp
+*~
+
+# Docker/Podman
+*.tar

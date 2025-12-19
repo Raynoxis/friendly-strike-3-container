@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose*.yml
+.docker
+
+# Scripts locaux (ne pas copier dans l'image)
+run.sh
+
+# Documentation
+*.md
+README*
+LICENSE
+
+# Claude
+.claude/
+
+# Temporaires
+*.log
+*.tmp
+*~
