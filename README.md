@@ -1,5 +1,15 @@
 # Friendly-Strike 3 Container
 
+![Friendly-Strike 3](docs/images/game.png)
+
+**Friendly-Strike 3** est un jeu d'action/arcade 2D multijoueur où jusqu'à 4 joueurs s'affrontent dans des arènes destructibles. Armés de pistolets, fusils, explosifs et équipements variés, les joueurs combattent dans des environnements interactifs avec des bâtiments, des plateformes et des cachettes.
+
+C'est le jeu auquel on jouait à 4 sur un seul clavier quand j'étais au collège. Je voulais le faire perdurer et le rendre jouable sur Linux !
+
+Site officiel : http://lucas.sonzogni.free.fr/fs3_en.htm
+
+---
+
 Conteneurisation du jeu Windows **Friendly-Strike 3** pour Linux avec Wine et Podman/Docker.
 
 ## Structure
