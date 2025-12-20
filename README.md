@@ -28,7 +28,7 @@ Ce projet permet de faire tourner ce petit bijou Windows sur **Linux** grâce à
 
 ## 📖 L'histoire derrière ce projet
 
-C'est le jeu auquel on jouait à 4 sur un seul clavier en salle de permanence au collège. Des heures de parties endiablées entre deux cours, de trahisons entre potes, de victoires volées à la dernière seconde — en gardant un œil sur la porte au cas où un pion débarque.
+C'est le jeu auquel on jouait à 4 sur un seul clavier en salle de permanence au collège. Des heures de parties endiablées entre deux cours, des fous rires, des victoires volées à la dernière seconde — en gardant un œil sur la porte au cas où un pion débarque.
 
 Je voulais le faire perdurer et le rendre jouable sur Linux. Mission accomplie.
 
