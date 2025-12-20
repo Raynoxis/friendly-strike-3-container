@@ -4,7 +4,7 @@
 
 > **4 joueurs. 1 clavier. 0 limite de fun.**
 
-Tu te souviens de ces soirées où vous étiez 4 entassés devant le même écran, les doigts qui se marchent dessus sur le clavier, à hurler de rire ? **Friendly-Strike 3**, c'est exactement ça.
+Tu te souviens de ces heures de permanence au collège, entassés à 4 devant le même PC, les doigts qui se marchent dessus sur le clavier, à essayer de ne pas se faire griller par les pions ? **Friendly-Strike 3**, c'est exactement ça.
 
 Ce projet permet de faire tourner ce petit bijou Windows sur **Linux** grâce à Wine et Podman/Docker. Parce que les bons jeux ne devraient jamais mourir.
 
@@ -28,7 +28,7 @@ Ce projet permet de faire tourner ce petit bijou Windows sur **Linux** grâce à
 
 ## 📖 L'histoire derrière ce projet
 
-C'est le jeu auquel on jouait à 4 sur un seul clavier quand j'étais au collège. Des heures de parties endiablées, de trahisons entre amis, de victoires volées à la dernière seconde.
+C'est le jeu auquel on jouait à 4 sur un seul clavier en salle de permanence au collège. Des heures de parties endiablées entre deux cours, de trahisons entre potes, de victoires volées à la dernière seconde — en gardant un œil sur la porte au cas où un pion débarque.
 
 Je voulais le faire perdurer et le rendre jouable sur Linux. Mission accomplie.
 
@@ -188,8 +188,8 @@ Le jeu **Friendly-Strike 3** reste la propriété de ses auteurs.
 
 <div align="center">
 
-**Fait avec ❤️ pour préserver un morceau de notre enfance**
+**Fait avec ❤️ pour préserver un morceau de notre adolescence**
 
-*Si toi aussi tu as des souvenirs de parties endiablées à 4 sur un clavier, donne une ⭐ au projet !*
+*Si toi aussi tu as des souvenirs de parties endiablées en salle de perm, donne une ⭐ au projet !*
 
 </div>
