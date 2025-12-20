@@ -2,7 +2,16 @@
 
 ![Friendly-Strike 3](docs/images/game.png)
 
-**Friendly-Strike 3** est un jeu d'action/arcade 2D multijoueur où jusqu'à 4 joueurs s'affrontent dans des arènes destructibles. Armés de pistolets, fusils, explosifs et équipements variés, les joueurs combattent dans des environnements interactifs avec des bâtiments, des plateformes et des cachettes.
+**Friendly-Strike 3** est un jeu de shoot/plateforme 2D nerveux et fun, successeur de Friendly-Strike 2. Affrontez vos amis ou l'ordinateur jusqu'à 4 joueurs sur le même écran !
+
+**Caractéristiques :**
+- **48 armes** : 38 achetables entre les rounds + 10 armes surpuissantes cachées dans les arènes
+- **Items tactiques** : grenades, grenades napalm, bombes fumigènes, roquettes télécommandées...
+- **IA avancée** avec 4 niveaux de difficulté
+- **Éditeur d'arènes** : créez vos propres maps avec 19 mondes disponibles
+- **Multijoueur en ligne** : 2 joueurs peuvent jouer en ligne depuis le même PC !
+
+*Be a smart strategist or big barbarian, it's up to you to choose!*
 
 C'est le jeu auquel on jouait à 4 sur un seul clavier quand j'étais au collège. Je voulais le faire perdurer et le rendre jouable sur Linux !
 
