@@ -2,144 +2,156 @@
 
 ![Friendly-Strike 3](docs/images/game.png)
 
-> **4 joueurs. 1 clavier. 0 limite de fun.**
+> **4 players. 1 keyboard. 0 limits on fun.**
 
-Tu te souviens de ces heures de permanence au collège, entassés à 4 devant le même PC, les doigts qui se marchent dessus sur le clavier, à essayer de ne pas se faire griller par les pions ? **Friendly-Strike 3**, c'est exactement ça.
+Remember those school breaks with four people crammed around one PC, fingers fighting on the same keyboard, trying not to get caught by the supervisors? **Friendly-Strike 3** is exactly that.
 
-Ce projet permet de faire tourner ce petit bijou Windows sur **Linux** grâce à Wine et Podman/Docker. Parce que les bons jeux ne devraient jamais mourir.
+This project makes this Windows gem run on **Linux** with Wine and Podman/Docker. Great games should not die.
 
 ---
 
-## 🔥 Pourquoi ce jeu est incroyable
+## 🔥 Why this game rules
 
 | | |
 |---|---|
-| 👥 **Jusqu'à 4 joueurs sur UN SEUL CLAVIER** | Oui, c'est le chaos. Oui, c'est génial. Active les touches rémanentes (toutes les 30s) et c'est parti ! |
-| 🌐 **Multijoueur LAN** | Organise des LAN parties comme à l'époque. Chaque joueur sur son PC, tous sur le même réseau. |
-| 🔫 **48 armes de destruction** | 38 achetables entre les rounds + 10 armes légendaires cachées dans les arènes |
-| 💣 **Arsenal tactique** | Grenades, napalm, bombes fumigènes, roquettes télécommandées... |
-| 🤖 **IA redoutable** | 4 niveaux de difficulté pour jouer solo ou compléter l'équipe |
-| 🏗️ **Éditeur d'arènes** | Crée tes propres maps avec 19 mondes différents |
-| 🎯 **Arènes destructibles** | Les murs explosent, les planchers s'effondrent, le chaos s'installe |
+| 👥 **Up to 4 players on ONE KEYBOARD** | Yes, it is chaos. Yes, it is awesome. Enable Sticky Keys (every 30s) and go. |
+| 🌐 **LAN multiplayer** | Run old-school LAN parties. Each player on their own PC, all on the same network. |
+| 🔫 **48 weapons of destruction** | 38 buyable between rounds + 10 legendary weapons hidden in arenas |
+| 💣 **Tactical arsenal** | Grenades, napalm, smoke bombs, remote-controlled rockets... |
+| 🤖 **Tough AI** | 4 difficulty levels for solo play or to fill teams |
+| 🏗️ **Arena editor** | Create your own maps with 19 different worlds |
+| 🎯 **Destructible arenas** | Walls explode, floors collapse, chaos takes over |
 
 *"Be a smart strategist or big barbarian, it's up to you to choose!"*
 
 ---
 
-## 📖 L'histoire derrière ce projet
+## 📖 The story behind this project
 
-C'est le jeu auquel on jouait à 4 sur un seul clavier en salle de permanence au collège. Des heures de parties endiablées entre deux cours, des fous rires, des victoires volées à la dernière seconde — en gardant un œil sur la porte au cas où un pion débarque.
+This is the game we played with four people on one keyboard in middle school. Hours of frantic matches between classes, laughs, clutch wins at the last second — always keeping one eye on the door in case a supervisor showed up.
 
-Je voulais le faire perdurer et le rendre jouable sur Linux. Mission accomplie.
+I wanted to keep it alive and playable on Linux. Mission accomplished.
 
-🌐 **Site officiel** : http://lucas.sonzogni.free.fr/fs3_en.htm
+🌐 **Official site**: http://lucas.sonzogni.free.fr/fs3_en.htm
 
 ---
 
-## 🚀 Installation rapide
+## 🚀 Quick install
 
 ```bash
-# Cloner le projet
+# Clone the project
 git clone https://github.com/Raynoxis/friendly-strike-3-container.git
 cd friendly-strike-3-container
 
-# Construire l'image
-podman build -t friendly-strike3:latest ./build
+# Pull the Docker Hub image
+podman pull docker.io/raynoxis/friendly-strike-3:latest
 
-# JOUER !
+# PLAY!
 ./scripts/run-game.sh
+```
+
+If you want to use a different image:
+
+```bash
+export FS3_IMAGE=docker.io/raynoxis/friendly-strike-3:latest
+```
+
+Optional (local build):
+
+```bash
+podman build -t docker.io/raynoxis/friendly-strike-3:latest ./build
 ```
 
 ---
 
-## 🎮 Modes de jeu
+## 🎮 Game modes
 
-### 🖥️ Solo / Local (jusqu'à 4 joueurs sur 1 PC)
+### 🖥️ Solo / Local (up to 4 players on 1 PC)
 
 ```bash
 ./scripts/run-game.sh
 ```
 
-Rassemblez-vous autour du clavier et que le meilleur gagne !
+Gather around the keyboard and may the best win!
 
-**💡 Astuce Windows** : Activez les touches rémanentes (Sticky Keys) pour éviter les conflits de touches. Le jeu vous proposera de les activer toutes les 30 secondes.
+**💡 Windows tip**: Enable Sticky Keys to avoid key conflicts. The game will prompt you every 30 seconds.
 
-### 🌐 Multijoueur LAN (jusqu'à 4 joueurs en réseau)
+### 🌐 LAN multiplayer (up to 4 players over the network)
 
-Organisez une vraie LAN party ! Chaque joueur sur son PC, tous connectés au même réseau local.
+Run a real LAN party! Each player on their PC, all connected to the same local network.
 
 <details>
-<summary><b>📋 Guide complet LAN (cliquez pour déplier)</b></summary>
+<summary><b>📋 Full LAN guide (click to expand)</b></summary>
 
-#### Étape 1 : Lancer le serveur
+#### Step 1: Start the server
 
-Sur le PC qui héberge :
+On the host PC:
 
 ```bash
 ./scripts/run-hoster.sh
 ```
 
-#### Étape 2 : Configurer le serveur
+#### Step 2: Configure the server
 
-![Configuration du serveur](docs/images/server.png)
+![Server setup](docs/images/server.png)
 
-1. Renseigne le nom du serveur, port, mot de passe...
-2. Menu **Server** → **Connect** pour lancer l'écoute
-3. Note l'adresse **Computer local IP** (ex: `192.168.0.20`)
+1. Fill in the server name, port, password...
+2. Menu **Server** → **Connect** to start listening
+3. Note the **Computer local IP** (ex: `192.168.0.20`)
 
-#### Étape 3 : Rejoindre le serveur
+#### Step 3: Join the server
 
-Sur **chaque PC** (y compris l'hébergeur) :
+On **each PC** (including the host):
 
 ```bash
 ./scripts/run-game.sh
 ```
 
-Puis dans le jeu :
+Then in the game:
 
-![Connexion directe](docs/images/connexion.png)
+![Direct connection](docs/images/connexion.png)
 
-1. **Multijoueur** → **Connexion directe**
-2. Entre l'IP du serveur (ex: `192.168.0.20`)
-3. Port : `1206` (par défaut)
+1. **Multiplayer** → **Direct connection**
+2. Enter the server IP (ex: `192.168.0.20`)
+3. Port: `1206` (default)
 
-#### Étape 4 : Créer et lancer la partie
+#### Step 4: Create and start the match
 
 ![Lobby](docs/images/create.png)
 
-1. L'hébergeur clique sur **Créer**
-2. Choisis la carte et les options
-3. Les autres joueurs rejoignent la partie
-4. **GO !**
+1. The host clicks **Create**
+2. Pick the map and options
+3. Other players join the match
+4. **GO!**
 
-#### Ports à ouvrir (pare-feu)
+#### Ports to open (firewall)
 
-| Port | Protocole | Description |
-|------|-----------|-------------|
-| 1203 | UDP | Port principal |
-| 1206 | UDP | Port serveur |
+| Port | Protocol | Description |
+|------|----------|-------------|
+| 1203 | UDP | Main port |
+| 1206 | UDP | Server port |
 
 </details>
 
 ---
 
-## 🔊 Audio HDMI (ALSA)
+## 🔊 HDMI audio (ALSA)
 
-Le chemin le plus fiable teste ici est ALSA avec HDMI, en root.
+The most reliable path tested here is ALSA over HDMI, run as root.
 
 ```bash
-# HDMI par defaut (souvent hw:0,3)
+# Default HDMI (often hw:0,3)
 sudo ./scripts/run-game-hdmi.sh
 
-# Autres sorties HDMI possibles
+# Other possible HDMI outputs
 sudo ./scripts/run-game-hdmi.sh hw:0,7
 sudo ./scripts/run-game-hdmi.sh hw:0,8
 
-# Lister les sorties HDMI disponibles
+# List available HDMI outputs
 cat /proc/asound/pcm | grep HDMI
 ```
 
-Pour un lancement "classique" (sans forcer HDMI) :
+For a regular launch (without forcing HDMI):
 
 ```bash
 ./scripts/run-game.sh
@@ -147,18 +159,19 @@ Pour un lancement "classique" (sans forcer HDMI) :
 
 ---
 
-## 📁 Structure du projet
+## 📁 Project structure
 
 ```
-├── build/                      # Construction de l'image
+├── build/                      # Image build
 │   ├── Dockerfile
 │   ├── entrypoint.sh
-│   └── game/                   # Fichiers du jeu
+│   └── game/                   # Game files
 │
-├── scripts/                    # Scripts d'exécution
-│   ├── run-game.sh             # Lancer le jeu
-│   ├── run-game-hdmi.sh         # Lancer le jeu avec audio HDMI (ALSA)
-│   └── run-hoster.sh           # Lancer le serveur LAN
+├── scripts/                    # Run scripts
+│   ├── run-game.sh             # Start the game
+│   ├── run-game-hdmi.sh         # Start the game with HDMI audio (ALSA)
+│   ├── run-hoster.sh           # Start the LAN server
+│   └── publish-image.sh        # Build + push the image to Docker Hub
 │
 ├── docker-compose.yml
 └── README.md
@@ -166,35 +179,46 @@ Pour un lancement "classique" (sans forcer HDMI) :
 
 ---
 
-## 🛠️ Commandes utiles
+## 🛠️ Useful commands
 
 ```bash
-# Voir les conteneurs en cours
+# See running containers
 podman ps --filter "name=fs3"
 
-# Arrêter le jeu
+# Stop the game
 podman stop fs3-game
 
-# Arrêter le serveur
+# Stop the server
 podman stop fs3-hoster
 
-# Logs du serveur
+# Server logs
 podman logs fs3-hoster
 ```
 
 ---
 
-## 📜 Licence
+## 📦 Docker Hub publishing (maintainer)
 
-Les fichiers de configuration de ce projet sont libres.
-Le jeu **Friendly-Strike 3** reste la propriété de ses auteurs.
+```bash
+./scripts/publish-image.sh
+```
+
+The script reuses the `dockerpass` alias from `~/.bashrc` for the token.
+Useful variables: `DOCKERHUB_USER`, `DOCKERHUB_TOKEN`, `FS3_IMAGE`.
+
+---
+
+## 📜 License
+
+This project's configuration files are free to use.
+The **Friendly-Strike 3** game remains the property of its authors.
 
 ---
 
 <div align="center">
 
-**Fait avec ❤️ pour préserver un morceau de notre adolescence**
+**Made with ❤️ to preserve a piece of our teenage years**
 
-*Si toi aussi tu as des souvenirs de parties endiablées en salle de perm, donne une ⭐ au projet !*
+*If you also have memories of epic matches in the school break room, give the project a ⭐!*
 
 </div>

@@ -1,9 +1,9 @@
-# Dockerfile léger pour Friendly-Strike 3
+# Lightweight Dockerfile for Friendly-Strike 3
 FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Ajout du dépôt WineHQ pour les dernières versions
+# Add the WineHQ repository for the latest versions
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -24,22 +24,22 @@ RUN dpkg --add-architecture i386 && \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Configuration de Wine
+# Wine configuration
 ENV WINEARCH=win32
 ENV WINEPREFIX=/wine
 
-# Initialisation légère de Wine (sans polices externes)
+# Lightweight Wine initialization (no extra fonts)
 RUN mkdir -p /wine && \
     wineboot --init 2>/dev/null || true && \
     wineserver -k || true
 
-# Création du répertoire du jeu
+# Create the game directory
 WORKDIR /game
 
-# Copie des fichiers du jeu
+# Copy game files
 COPY game/ /game/
 
-# Script de démarrage
+# Entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

@@ -1,15 +1,17 @@
 #!/bin/bash
 # =============================================================================
-# run-game.sh - Lancement de Friendly-Strike 3 en conteneur
+# run-game.sh - Run Friendly-Strike 3 in a container
 # =============================================================================
 
 set -e
 
-# Configuration par défaut
+# Default configuration
 DISPLAY_VAR="${DISPLAY:-192.168.0.20:0.0}"
-IMAGE_NAME="friendly-strike3:latest"
+CONTAINER_BIN="${FS3_CONTAINER_BIN:-podman}"
+IMAGE_NAME="${FS3_IMAGE:-docker.io/raynoxis/friendly-strike-3:latest}"
+PULL_POLICY="${FS3_PULL_POLICY:-missing}"
 
-# Passer /dev/snd si disponible (audio non garanti en rootless)
+# Pass /dev/snd if available (audio not guaranteed rootless)
 AUDIO_OPTS=""
 if [ -d "/dev/snd" ]; then
     AUDIO_OPTS="--device /dev/snd"
@@ -20,7 +22,8 @@ echo "DISPLAY: $DISPLAY_VAR"
 echo "========================="
 echo ""
 
-exec podman run --rm -it \
+exec "$CONTAINER_BIN" run --rm -it \
+    --pull="$PULL_POLICY" \
     --network=host \
     -e DISPLAY="$DISPLAY_VAR" \
     $AUDIO_OPTS \

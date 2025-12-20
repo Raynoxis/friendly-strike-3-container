@@ -1,33 +1,33 @@
 #!/bin/bash
 set -e
 
-# Vérification du DISPLAY
+# Check DISPLAY
 if [ -z "$DISPLAY" ]; then
-    echo "Erreur: DISPLAY non défini. Un serveur X11 est requis."
-    echo "Exemple: -e DISPLAY=192.168.0.20:0.0"
+    echo "Error: DISPLAY not set. An X11 server is required."
+    echo "Example: -e DISPLAY=192.168.0.20:0.0"
     exit 1
 fi
 
-# Configuration PulseAudio (si socket disponible)
+# Configure PulseAudio (if socket available)
 if [ -n "$PULSE_SERVER" ]; then
-    echo "PulseAudio configuré: $PULSE_SERVER"
+    echo "PulseAudio configured: $PULSE_SERVER"
 elif [ -S "/run/user/1000/pulse/native" ]; then
     export PULSE_SERVER=unix:/run/user/1000/pulse/native
 fi
 
 case "$1" in
     game)
-        echo "Lancement de Friendly-Strike 3..."
+        echo "Starting Friendly-Strike 3..."
         cd /game
         wine Friendly-Strike3.exe
         ;;
     hoster)
-        echo "Lancement du serveur FS3 Hoster..."
+        echo "Starting FS3 Hoster server..."
         cd /game/FS3hoster
         wine FrStr3Hoster.exe
         ;;
     chat)
-        echo "Lancement de FS3 Chat Authent..."
+        echo "Starting FS3 Chat Authent..."
         cd /game/FS3hoster
         wine FS3_ChatAuthent.exe
         ;;
@@ -36,10 +36,10 @@ case "$1" in
         ;;
     *)
         echo "Usage: $0 {game|hoster|chat|bash}"
-        echo "  game   - Lance le jeu Friendly-Strike 3"
-        echo "  hoster - Lance le serveur d'hébergement"
-        echo "  chat   - Lance le serveur d'authentification chat"
-        echo "  bash   - Ouvre un shell"
+        echo "  game   - Start the Friendly-Strike 3 game"
+        echo "  hoster - Start the hosting server"
+        echo "  chat   - Start the chat authentication server"
+        echo "  bash   - Open a shell"
         exit 1
         ;;
 esac

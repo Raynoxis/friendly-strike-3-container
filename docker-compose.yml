@@ -4,11 +4,12 @@ version: '3.8'
 # Friendly-Strike 3 - Docker Compose
 # =============================================================================
 #
-# Variables d'environnement:
-#   DISPLAY       - Serveur X11 (défaut: 192.168.0.20:0.0)
-#   PULSE_SOCKET  - Socket PulseAudio (défaut: /run/user/1000/pulse/native)
+# Environment variables:
+#   DISPLAY       - X11 server (default: 192.168.0.20:0.0)
+#   PULSE_SOCKET  - PulseAudio socket (default: /run/user/1000/pulse/native)
+#   FS3_IMAGE     - Docker Hub image (default: docker.io/raynoxis/friendly-strike-3:latest)
 #
-# Utilisation:
+# Usage:
 #   podman-compose --profile client up game
 #   podman-compose --profile server up hoster
 #
@@ -16,11 +17,10 @@ version: '3.8'
 
 services:
   # ===========================================================================
-  # Jeu client
+  # Game client
   # ===========================================================================
   game:
-    build: ./build
-    image: friendly-strike3:latest
+    image: ${FS3_IMAGE:-docker.io/raynoxis/friendly-strike-3:latest}
     container_name: fs3-game
     network_mode: host
     environment:
@@ -36,11 +36,10 @@ services:
       - client
 
   # ===========================================================================
-  # Serveur avec GUI
+  # Server with GUI
   # ===========================================================================
   hoster:
-    build: ./build
-    image: friendly-strike3:latest
+    image: ${FS3_IMAGE:-docker.io/raynoxis/friendly-strike-3:latest}
     container_name: fs3-hoster
     network_mode: host
     environment:
