@@ -46,9 +46,6 @@ cd friendly-strike-3-container
 # Construire l'image
 podman build -t friendly-strike3:latest ./build
 
-# Configurer l'audio (une seule fois)
-sudo ./scripts/setup-host-audio.sh
-
 # JOUER !
 ./scripts/run-game.sh
 ```
@@ -126,17 +123,26 @@ Puis dans le jeu :
 
 ---
 
-## 🔊 Configuration audio
+## 🔊 Audio HDMI (ALSA)
+
+Le chemin le plus fiable teste ici est ALSA avec HDMI, en root.
 
 ```bash
-# Sortie HDMI
-./scripts/select-audio-output.sh hdmi
+# HDMI par defaut (souvent hw:0,3)
+sudo ./scripts/run-game-hdmi.sh
 
-# Sortie haut-parleurs
-./scripts/select-audio-output.sh analog
+# Autres sorties HDMI possibles
+sudo ./scripts/run-game-hdmi.sh hw:0,7
+sudo ./scripts/run-game-hdmi.sh hw:0,8
 
-# Voir les options disponibles
-./scripts/select-audio-output.sh list
+# Lister les sorties HDMI disponibles
+cat /proc/asound/pcm | grep HDMI
+```
+
+Pour un lancement "classique" (sans forcer HDMI) :
+
+```bash
+./scripts/run-game.sh
 ```
 
 ---
@@ -151,9 +157,8 @@ Puis dans le jeu :
 │
 ├── scripts/                    # Scripts d'exécution
 │   ├── run-game.sh             # Lancer le jeu
-│   ├── run-hoster.sh           # Lancer le serveur LAN
-│   ├── setup-host-audio.sh     # Config audio
-│   └── select-audio-output.sh  # Sélection sortie audio
+│   ├── run-game-hdmi.sh         # Lancer le jeu avec audio HDMI (ALSA)
+│   └── run-hoster.sh           # Lancer le serveur LAN
 │
 ├── docker-compose.yml
 └── README.md
